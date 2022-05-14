@@ -5,6 +5,7 @@ import com.example.firstspringapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -24,6 +25,8 @@ public class UserRepositoryImpl implements UserRepository {
 
     private static final String SQL_GET_ALL_USERS = "SELECT * FROM USERS";
     private static final String SQL_CREATE_USER = "INSERT INTO USERS (username, password, mail, date) values (?,?,?,?)";
+    private static final String SQL_UPDATE_USER ="UPDATE USERS SET (username = ?, password =?, mail =?)  where id = ?";
+    private static final String SQL_DELETE_BY_ID_USER = "DELETE FROM USERS WHERE id =?";
 
 
     @Override
@@ -42,12 +45,16 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Integer update(User user, Integer id) {
-        return null;
+        return jdbcTemplate.update(SQL_UPDATE_USER,
+        user.getId(),
+        user.getUsername(),
+        user.getPassword(),
+        user.getMail());
     }
 
     @Override
     public Integer delete(Integer id) {
-        return null;
+        return jdbcTemplate.update(SQL_DELETE_BY_ID_USER);
     }
 
     @Override
