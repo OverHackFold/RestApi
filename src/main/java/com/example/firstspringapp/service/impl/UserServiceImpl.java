@@ -31,12 +31,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer update(User user, Integer id) {
-        return null;
+        return userRepository.update(user ,id);
     }
 
     @Override
     public Integer delete(Integer id) {
-        return null;
+        return userRepository.delete(id);
     }
 
     @Override
