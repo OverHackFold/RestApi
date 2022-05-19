@@ -26,7 +26,7 @@ public class UserController {
         return userService.getAll();
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     @PostMapping
     public Integer createUser(@RequestBody User user) {
         return userService.create(user);
@@ -39,14 +39,14 @@ public class UserController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping(value ="/{id}" )
-    public Integer deleteUser (@PathVariable Integer id){
-     return userService.delete(id);
+    @DeleteMapping(value = "/{id}")
+    public Integer deleteUser(@PathVariable Integer id) {
+        return userService.delete(id);
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/id")
-    public Optional<User> getUserById(@PathVariable Integer id){
+    @GetMapping(value = "/{id}")
+    public Optional<User> getUserById(@PathVariable Integer id) {
         return userService.getById(id);
     }
 }
